@@ -1,6 +1,6 @@
 import json
 from http.server import BaseHTTPRequestHandler, HTTPServer
-from views import get_all_animals, get_single_animal, get_all_locations, get_single_location, get_single_employee, get_all_employees, create_animal,create_location
+from views import get_all_animals, get_single_animal, get_all_locations, get_single_location, get_single_employee, get_all_employees, create_animal,create_location, create_employee
 
 
 # Here's a class. It inherits from another class.
@@ -111,6 +111,8 @@ class HandleRequests(BaseHTTPRequestHandler):
             response = create_animal(post_body)
         if resource == "locations":
             response = create_location(post_body)
+        if resource == "employees":
+            response = create_employee(post_body)    
         # Encode the new animal and send in response
         self.wfile.write(json.dumps(response).encode())
 

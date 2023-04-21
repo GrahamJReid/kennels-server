@@ -6,3 +6,4 @@ from .location_requests import create_location
 from .location_requests import get_single_location
 from .employee_requests import get_all_employees
 from .employee_requests import get_single_employee
+from .employee_requests import create_employee
