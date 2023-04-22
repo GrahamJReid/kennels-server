@@ -12,7 +12,7 @@ def get_all_employees():
     return EMPLOYEES
 # Function with a single parameter
 def get_single_employee(id):
-    # Variable to hold the found animal, if it exists
+    # Variable to hold the found employee, if it exists
     requested_employee = None
 
     # Iterate the EMPLOYEES list above. Very similar to the
@@ -26,16 +26,16 @@ def get_single_employee(id):
     return requested_employee
   
 def create_employee(employee):
-    # Get the id value of the last animal in the list
+    # Get the id value of the last employee in the list
     max_id = EMPLOYEES[-1]["id"]
 
     # Add 1 to whatever that number is
     new_id = max_id + 1
 
-    # Add an `id` property to the animal dictionary
+    # Add an `id` property to the employee dictionary
     employee["id"] = new_id
 
-    # Add the animal dictionary to the list
+    # Add the employee dictionary to the list
     EMPLOYEES.append(employee)
 
     # Return the dictionary with `id` property added
@@ -55,3 +55,11 @@ def delete_employee(id):
     # If the employee was found, use pop(int) to remove it from list
     if employee_index >= 0:
         EMPLOYEES.pop(employee_index)
+def update_employee(id, new_employee):
+    # Iterate the employeeS list, but use enumerate() so that
+    # you can access the index value of each item.
+    for index, employee in enumerate(EMPLOYEES):
+        if employee["id"] == id:
+            # Found the employee. Update the value.
+            EMPLOYEES[index] = new_employee
+            break
