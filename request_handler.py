@@ -95,10 +95,10 @@ class HandleRequests(BaseHTTPRequestHandler):
                     response = get_all_customers()
 
         else: # There is a ? in the path, run the query param functions
-                 (resource, query) = parsed
+            (resource, query) = parsed
 
             # see if the query dictionary has an email key
-        if query.get('email') and resource == 'customers':
+            if query.get('email') and resource == 'customers':
                 response = get_customer_by_email(query['email'][0])
 
         self.wfile.write(json.dumps(response).encode())
