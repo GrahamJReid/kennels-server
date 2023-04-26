@@ -4,6 +4,8 @@ from .animal_requests import create_animal
 from .animal_requests import delete_animal
 from .animal_requests import update_animal
 from .animal_requests import get_animal_by_location_id
+from .animal_requests import get_animal_by_status
+
 from .location_requests import get_all_locations
 from .location_requests import create_location
 from .location_requests import delete_location

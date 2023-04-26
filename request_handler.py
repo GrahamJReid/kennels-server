@@ -1,7 +1,7 @@
 from urllib.parse import urlparse, parse_qs
 import json
 from http.server import BaseHTTPRequestHandler, HTTPServer
-from views import get_all_animals, get_single_animal, get_all_locations, get_single_location, get_single_employee, get_all_employees, create_animal,create_location, create_employee, delete_animal, delete_location, delete_employee, update_animal, update_employee, update_location,get_single_customer,get_all_customers,create_customer,update_customer,delete_customer, get_customer_by_email, get_animal_by_location_id, get_employee_by_location_id
+from views import get_all_animals, get_single_animal, get_all_locations, get_single_location, get_single_employee, get_all_employees, create_animal,create_location, create_employee, delete_animal, delete_location, delete_employee, update_animal, update_employee, update_location,get_single_customer,get_all_customers,create_customer,update_customer,delete_customer, get_customer_by_email, get_animal_by_location_id, get_employee_by_location_id, get_animal_by_status
 
 
 # Here's a class. It inherits from another class.
@@ -103,7 +103,9 @@ class HandleRequests(BaseHTTPRequestHandler):
             if query.get('location_id') and resource == 'animals':
                 response = get_animal_by_location_id(query['location_id'][0])    
             if query.get('location_id') and resource == 'employees':
-                response = get_employee_by_location_id(query['location_id'][0])   
+                response = get_employee_by_location_id(query['location_id'][0])
+            if query.get('status') and resource == 'animals':
+                response = get_animal_by_status(query['status'][0])         
         self.wfile.write(json.dumps(response).encode())
 
     # Here's a method on the class that overrides the parent's method.
