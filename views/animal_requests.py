@@ -1,6 +1,6 @@
 import sqlite3
 import json
-from models import Animal
+from models import Animal, Location,Customer
 
 ANIMALS = [
     {
@@ -46,9 +46,20 @@ def get_all_animals():
             a.breed,
             a.status,
             a.location_id,
-            a.customer_id
-        FROM animal a
-        """)
+            a.customer_id,
+            l.name location_name,
+            l.address location_address,
+            c.name,
+            c.address,
+            c.email,
+            c.password
+            
+        FROM Animal a
+        JOIN Location l
+            ON l.id = a.location_id
+        JOIN Customer c
+            ON c.id = a.customer_id
+                """)
 
         # Initialize an empty list to hold all animal representations
         animals = []
@@ -59,15 +70,23 @@ def get_all_animals():
         # Iterate list of data returned from database
         for row in dataset:
 
-            # Create an animal instance from the current row.
-            # Note that the database fields are specified in
-            # exact order of the parameters defined in the
-            # Animal class above.
-            animal = Animal(row['id'], row['name'], row['breed'],
-                            row['status'], row['location_id'],
-                            row['customer_id'])
+            # Create an animal instance from the current row
+            animal = Animal(row['id'], row['name'], row['breed'], row['status'],
+                            row['location_id'], row['customer_id'])
 
-            animals.append(animal.__dict__) # see the notes below for an explanation on this line of code.
+            # Create a Location instance from the current row
+            location = Location(row['id'], row['location_name'], row['location_address'])
+            customer = Customer(row['id'], row['name'], row['address'],
+                            row['email'], row['password'])
+                            
+
+            # Add the dictionary representation of the location to the animal
+            animal.location = location.__dict__
+            animal.customer = customer.__dict__
+
+            # Add the dictionary representation of the animal to the list
+            animals.append(animal.__dict__)
+
 
     return animals
 # Function with a single parameter
