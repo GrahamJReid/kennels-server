@@ -49,7 +49,6 @@ def get_all_animals():
             a.customer_id,
             l.name location_name,
             l.address location_address,
-            c.id,
             c.name,
             c.address,
             c.email,
